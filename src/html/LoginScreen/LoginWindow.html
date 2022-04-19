@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+  <style>
+    :root {
+      --window-width: 350px;
+      --window-height: 530px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: var(--window-width);
+      height: var(--window-height);
+      background-color: #ffffff;
+      border: 1px solid #D0D0D0;
+      box-shadow: 0 1px 5px rgba(208, 208, 208, 0.9);
+      overflow: hidden;
+    }
+
+    #close {
+      --width: 30px;
+      --height: 30px;
+      position: absolute;
+      width: var(--width);
+      height: var(--height);
+      font-size: 18px;
+      text-align: center;
+      line-height: var(--height);
+      left: calc(var(--window-width) - var(--width));
+      z-index: 1;
+    }
+
+    #close:hover {
+      color: #2f3241;
+      cursor: pointer;
+      background-color: crimson;
+    }
+
+    #qr-code-login, #phone-number-login {
+      position: absolute;
+      width: var(--window-width);
+      height: var(--window-height);
+
+    }
+
+    #qr-code-login {
+      left: 0;
+    }
+
+    #phone-number-login {
+      left: calc(var(--window-width) + 100px);
+    }
+
+    .qr-code {
+      width: 180px;
+      height: 180px;
+      background-color: #D0D0D0;
+      margin: auto;
+    }
+
+    h1 {
+      font-size: 45px;
+      /*font-family: 黑体;*/
+      line-height: 150px;
+      text-align: center;
+    }
+
+    .text {
+      width: 120px;
+      text-align: center;
+      margin: 80px auto;
+    }
+
+    .text:hover {
+      color: #D0D0D0;
+      cursor: pointer;
+    }
+
+    .return-code {
+      position: relative;
+      height: 80px;
+      width: 260px;
+      border: 1px solid #D8d8d8;
+      margin: 150px auto;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+<i id="close" class="bi bi-x-lg"></i>
+<div id="qr-code-login">
+  <h1>扫码登录</h1>
+  <div id="qr-code-img" class="qr-code">
+
+  </div>
+  <div id="phone-login" class="text">其他方式登陆<i class="bi bi-chevron-right"></i></div>
+</div>
+<div id="phone-number-login">
+  <i id="qr-login" class="bi bi-chevron-left"></i>
+  <div>
+    <div>
+
+    </div>
+  </div>
+</div>
+<script src="LoginWindowEvents.js"></script>
+</body>
+</html>
