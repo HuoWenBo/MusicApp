@@ -12,6 +12,7 @@ function createWindow(windowName, filepath, windowProperties) {
   windowProperties.icon =
     process.platform === 'linux' ? { icon: path.join(__dirname, '../build/icon.png') } : {}
   windowProperties.webPreferences = {
+    contextIsolation: true,
     preload: path.join(__dirname, 'preload.js')
   }
   AppWindows[windowName] = new BrowserWindow(windowProperties)
@@ -27,7 +28,7 @@ function createWindow(windowName, filepath, windowProperties) {
     return { action: 'deny' }
   })
 
-  // and load the App.html of the app.
+  // and load the App-back.html of the app.
   AppWindows[windowName].loadFile(path.join(__dirname, filepath)).then(() => {
     // console.log(`filepath: ${_filepath}`)
   })
@@ -35,11 +36,16 @@ function createWindow(windowName, filepath, windowProperties) {
 
 ipcMain.on('close-window', (_, windowName) => {
   // 如果是关闭主窗口则关闭所有窗口并退出程序
-  if (windowName === 'MainWindow')
+  if (windowName === 'MainWindow') {
     for (let key in AppWindows) {
-      if (AppWindows[key]) AppWindows[key].destroy()
-      AppWindows[windowName] = null
+      if (AppWindows[key]) {
+        AppWindows[key].destroy()
+        AppWindows[key] = null
+      }
     }
+    return
+  }
+
   if (!AppWindows[windowName]) {
     throw Error(`没有名为 ${windowName} 的窗体`)
   }
@@ -80,17 +86,13 @@ app.whenReady().then(() => {
   })
 
   createWindow('MainWindow', 'App.html', {
-    width: 1300,
-    height: 850,
+    width: 1022,
+    height: 670,
     show: false,
     frame: false,
     transparent: true,
     autoHideMenuBar: true,
-    ...(process.platform === 'linux'
-      ? {
-          icon: path.join(__dirname, '../build/icon.png')
-        }
-      : {})
+    resizable: false
   })
 
   app.on('activate', function () {

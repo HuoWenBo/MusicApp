@@ -27,7 +27,7 @@
   })
 
   document.getElementById('login').onclick = () => {
-    window.api.WindowEvents.createWindow('LoginWindow', './html/LoginScreen/LoginWindow.html', {
+    window.api.WindowEvents.createWindow('LoginWindow', './html/LoginScreen/Login.html', {
       // --window-width: 350px;
       // --window-height: 530px;
       width: 350,
